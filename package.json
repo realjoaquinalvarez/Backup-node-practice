@@ -1,0 +1,14 @@
+{
+  "name": "1-devtree",
+  "version": "1.0.0",
+  "description": "Primer proyecto con express y ts",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jose A",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
