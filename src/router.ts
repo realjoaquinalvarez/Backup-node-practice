@@ -1,10 +1,11 @@
 import { Router } from 'express';
 import { body } from'express-validator';
 import { createAccount, login } from './handlers';
+import { handleInputErrors } from './middleware/validations';
 
 const router = Router();
 
-router.post('/auth/register', 
+router.post('/auth/register',
     body('handle')
         .notEmpty()
         .withMessage('El handle no puede ir vacio'),
@@ -17,6 +18,7 @@ router.post('/auth/register',
     body('password')
         .isLength({min: 8})
         .withMessage('El password debe tener al menos 8 caracteres'),
+    handleInputErrors,    
     createAccount);
 
 router.post('/auth/login', 
