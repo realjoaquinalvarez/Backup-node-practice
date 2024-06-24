@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { validationResult } from 'express-validator';
 import slugify from 'slugify';
 import User from "../models/User";
-import { hashPassword } from '../utils/auth';
+import { checkPassword, hashPassword } from '../utils/auth';
 
 export const createAccount = async(req: Request, res: Response) => {
 
@@ -63,6 +63,13 @@ export const login = async (req: Request, res: Response ) => {
     }
 
     // Comprobar password
-    console.log(user.password)
+    const isPasswordCorrect = await checkPassword(password, user.password);
+    if(!isPasswordCorrect){
+        const error = new Error('El password es incorrecto');
+        res.status(401).json({error : error.message});
+        return;
+    }
+
+    res.send('Autenticado...');
     
 }
